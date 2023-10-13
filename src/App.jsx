@@ -1,17 +1,26 @@
-import { useState } from "react";
-import { Card, FormTask,Task } from "./components";
-
+import { useEffect, useState } from "react";
+import { Card, FormTask, Task } from "./components";
+import { read } from "./services";
 
 export default function App() {
+  const [tasks, setTasks] = useState([]);
+
+  const getTasks = async () => {
+    const response = await read();
+    setTasks(response);
+  };
+
+  useEffect(() => {
+    getTasks();
+  }, []);
+
   return (
     <div className="mt-10">
       <Card>
-        <FormTask />
+        <FormTask getTasks={getTasks} />
       </Card>
-      <Task text="Buy Grocery"/>
-      <Task text="Send email to Mark"/>
-      <Task text="Complete Assignment"/>
-      <Task text="Send email to Karlos"/>
+      {tasks.length > 0 &&
+        tasks.map((task) => <Task key={task.id} task={task} />)}
     </div>
   );
 }
