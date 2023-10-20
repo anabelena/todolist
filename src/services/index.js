@@ -1,26 +1,19 @@
 //Funciones para CRUD
-//Funcion asincrona 
+import { makeHttpRequest } from "./config";
 
-const URLApi = "https://65273be7917d673fd76d826c.mockapi.io/tasks";
+export async function create(body,url) {
+  return await makeHttpRequest({url,body,method:"POST"})
+}
 
+export async function read(url) {
+  return await makeHttpRequest({url})
+}
 
-//body recibira el objeto de la API
-export async function create(body) {
-    const response = await fetch(URLApi, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-    });
-  
-    const data = await response.json();
-  
-    return data;
-  }
-  
-  export async function read() {
-    const response = await fetch(URLApi);
-    const data = await response.json();
-    return data;
-  }
+export async function update(id, body,url) {
+  return await makeHttpRequest({id,body,url,method:"PUT"})
+}
+
+export async function destroy(id,url) {
+  return await makeHttpRequest({id,url,method:"DELETE"})
+}
+
