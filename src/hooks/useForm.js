@@ -1,4 +1,4 @@
-//Custom Hooks -> Funciones (no retornan componentes)
+//Custom Hooks -> Funciones (x lo general retornan OBJETOS)
 import { useState } from "react";
 
 export function useForm(inputs) {

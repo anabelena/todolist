@@ -9,6 +9,7 @@ export default function Form({
   errors,
   textButton,
 }) {
+  
   return (
     <form onSubmit={handleFormSubmit} className="mb-5 flex flex-col gap-5">
       {inputs.map((input) => (

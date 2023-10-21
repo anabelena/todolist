@@ -1,19 +1,30 @@
 import { useForm } from "../../hooks/useForm";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { saveUser } from "../../slices/userSlice";
+
 import { Card, Form } from "../../components";
 import { inputs } from "./form";
+import { create } from "../../services";
 
 export default function SignUp() {
-  const { errors, values, handleInputChange, validateIfValuesHasEmpty } =
-    useForm({
+
+  const {values,errors,handleInputChange,validateIfValuesHasEmpty} = useForm({
       name: "",
       lastname: "",
       email: "",
       password: "",
     });
 
-  const handleFormSubmit = (event) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
     validateIfValuesHasEmpty();
+    const user = await create(values,"users");
+    dispatch(saveUser(user)); //guarda usuario
+    navigate("/"); //vuelve al home
   };
 
   return (
@@ -25,7 +36,7 @@ export default function SignUp() {
           errors={errors}
           handleFormSubmit={handleFormSubmit}
           handleInputChange={handleInputChange}
-          textButton="Crear cuenta"
+          textButton= "Sign up"
           values={values}
         />
       </Card>
