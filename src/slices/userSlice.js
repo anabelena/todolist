@@ -8,7 +8,7 @@ export const userSlice = createSlice({
   reducers: {
     saveUser: (state, action) => {
       state.data = action.payload; //objeto
-      //convertir obejto a string con stringify
+      //convertir objeto a string con stringify
       localStorage.setItem("user", JSON.stringify(action.payload));
     },
   },

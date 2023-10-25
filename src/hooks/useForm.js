@@ -9,8 +9,7 @@ export function useForm(inputs) {
 
   const handleInputChange = (event) => {
     setValues({
-      ...values,
-      [event.target.name]: event.target.value,
+      ...values,[event.target.name]: event.target.value,
     });
   };
 

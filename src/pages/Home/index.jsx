@@ -4,7 +4,7 @@ import { Card,FormTask,Task } from "../../components";
 
 export default function Home(){
 
-    const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState([]);
 
   const getTasks = async () => {
     const response = await read("tasks");
